@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  padding: 0.5rem;
+  background: white;
+  width: 20vw;
+}
+
+.main {
+  display: grid;
+  place-content: center;
+}
+
+@media (prefers-color-scheme: light) {
+  .header {
+    background: white;
+  }
+}
