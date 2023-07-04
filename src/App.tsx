@@ -1,6 +1,8 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import logoPichincha from '/pichincha-logo.png';
-import styles from './App.module.css'
+import styles from './App.module.css';
+import { Button } from './components';
+
 
 function App() {
   return (
@@ -11,6 +13,12 @@ function App() {
       <main className={styles.main}>
         <Router></Router>
       </main>
+      <Button onClick={() => console.log('clicked')} disabled>
+        Agregar
+      </Button>
+      <Button type="secondary" onClick={() => console.log('clicked reiniciar')}>
+        Reiniciar
+      </Button>
     </>
   );
 }
