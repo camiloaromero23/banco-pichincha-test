@@ -1,9 +1,9 @@
 import React from 'react';
-import { Data } from '../interfaces/data.interface';
+import { Product } from '../interfaces/product.interface';
 import { useParams } from 'react-router-dom';
 
 interface Props {
-  id?: Data['id'];
+  id?: Product['id'];
 }
 
 export const ProductFormView: React.FC<Props> = () => {

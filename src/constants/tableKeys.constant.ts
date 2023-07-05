@@ -1,7 +1,7 @@
-import { DataWithoutId } from '../interfaces/data.interface';
+import { ProductWithoutId } from '../interfaces/product.interface';
 
 type ITableKeys = {
-  [key in keyof DataWithoutId]: string;
+  [key in keyof ProductWithoutId]: string;
 };
 
 export const tableKeys: ITableKeys = {

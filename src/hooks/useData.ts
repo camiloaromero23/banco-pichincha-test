@@ -1,69 +1,41 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Data } from '../interfaces/data.interface';
+import { Product } from '../interfaces/product.interface';
 import { pluralize } from '../utils/pluralize';
 import { useFilter } from './useFilter';
+import { useQuery } from '@tanstack/react-query';
 
 interface UseData {
   count: string;
-  data: Data[];
+  data: Product[];
   handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void;
   search: string;
 }
 
+const getData = async (): Promise<Product[]> => {
+  const headers = new Headers();
+  //TODO: Handle authorId
+  const authorId = '1';
+  headers.append('authorId', authorId);
+  const requestOptions = {
+    method: 'GET',
+    headers,
+    redirect: 'follow' as RequestRedirect,
+  };
+
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/bp/products`, requestOptions);
+  const data = await res.json();
+  return data;
+};
+
 export const useData = (): UseData => {
-  const [data, setData] = useState<Data[]>([]);
+  const { data } = useQuery({ queryKey: ['products'], queryFn: getData });
 
   const [count, setCount] = useState<string>('');
 
-  const { filteredData, search, setSearch } = useFilter(data, 'name');
+  const { filteredData, search, setSearch } = useFilter(data || [], 'name');
 
   useEffect(() => {
-    setData([
-      {
-        id: '1',
-        logo: 'logo',
-        name: 'Nombre del producto',
-        description: 'Descripción',
-        date_release: '01/05/2000',
-        date_revision: '01/01/2001',
-      },
-      {
-        id: '2',
-        logo: 'logo',
-        name: 'Nombre del producto',
-        description: 'Descripción',
-        date_release: '01/05/2000',
-        date_revision: '01/01/2001',
-      },
-      {
-        id: '3',
-        logo: 'logo',
-        name: 'Nombre del producto',
-        description: 'Descripción',
-        date_release: '01/05/2000',
-        date_revision: '01/01/2001',
-      },
-      {
-        id: '4',
-        logo: 'logo',
-        name: 'Nombre del producto',
-        description: 'Descripción',
-        date_release: '01/05/2000',
-        date_revision: '01/01/2001',
-      },
-      {
-        id: '5',
-        logo: 'logo',
-        name: 'Nimbre del producto',
-        description: 'Descripción',
-        date_release: '01/05/2000',
-        date_revision: '01/01/2001',
-      },
-    ]);
-  }, []);
-
-  useEffect(() => {
-    setCount(pluralize(data.length, 'Resultado', 'Resultados'));
+    setCount(pluralize(data?.length || 0, 'Resultado', 'Resultados'));
   }, [data]);
 
   useEffect(() => {

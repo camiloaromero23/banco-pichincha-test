@@ -37,3 +37,9 @@ td {
   display: flex;
   align-items: center;
 }
+
+.logo {
+  max-width: 25px;
+  max-height: 25px;
+  border-radius: 50%;
+}

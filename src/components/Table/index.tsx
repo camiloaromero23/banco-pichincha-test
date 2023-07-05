@@ -1,14 +1,16 @@
 import React from 'react';
 
+import defaultLogo from '../../assets/default-logo.svg';
 import dots from '../../assets/dots.svg';
 import { tableKeys } from '../../constants/tableKeys.constant';
-import { Data, DataWithoutId } from '../../interfaces/data.interface';
+import { Product } from '../../interfaces/product.interface';
+import { formatDate } from '../../utils/date';
 import { InfoIcon } from './InfoIcon';
 
 import styles from './Table.module.css';
 
 interface Props {
-  data: Data[];
+  data: Product[];
 }
 
 export const Table: React.FC<Props> = ({ data }) => {
@@ -20,18 +22,14 @@ export const Table: React.FC<Props> = ({ data }) => {
     <table className={styles.table}>
       <thead className={styles.tableHead}>
         <tr className={styles.tableRow}>
-          {Object.keys(data[0]).map((item, index) => {
-            if (item === 'id') {
-              return null;
-            }
-
-            if (['name', 'logo'].includes(item)) {
-              return <th key={`${item}-${index}`}>{tableKeys[item as keyof DataWithoutId]}</th>;
+          {Object.entries(tableKeys).map(([key, item], index) => {
+            if (['name', 'logo'].includes(key)) {
+              return <th key={`${item}-${index}`}>{item}</th>;
             }
             return (
               <th key={`${item}-${index}`}>
                 <span className={styles.tableHeaderContainer}>
-                  {tableKeys[item as keyof DataWithoutId]}
+                  {item}
                   <div className={styles.infoIconContainer}>
                     <InfoIcon fill="#959798" />
                   </div>
@@ -45,11 +43,20 @@ export const Table: React.FC<Props> = ({ data }) => {
       <tbody>
         {data.map((item) => (
           <tr key={item.id} className={styles.tableRow}>
-            <td>{item.logo}</td>
+            <td>
+              <img
+                src={item.logo}
+                className={styles.logo}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null;
+                  currentTarget.src = defaultLogo;
+                }}
+              />
+            </td>
             <td>{item.name}</td>
             <td>{item.description}</td>
-            <td>{item.date_release}</td>
-            <td>{item.date_revision}</td>
+            <td>{formatDate(item.date_release)}</td>
+            <td>{formatDate(item.date_revision)}</td>
             <td className={styles.tableRow}>
               <img src={dots} className={styles.options} />
             </td>

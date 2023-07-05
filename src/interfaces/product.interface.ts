@@ -1,4 +1,4 @@
-export interface Data {
+export interface Product {
   id: string;
   logo: string;
   name: string;
@@ -7,5 +7,5 @@ export interface Data {
   description: string;
 }
 
-export type DataWithoutId = Omit<Data, 'id'>;
+export type ProductWithoutId = Omit<Product, 'id'>;
 
