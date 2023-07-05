@@ -1,0 +1,39 @@
+.table {
+  background-color: white;
+  padding: 1rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.tableHead {
+  background-color: #f9fafc;
+  border-radius: 3px;
+}
+
+.tableRow {
+  border-bottom: 2px solid #f5f5f5;
+}
+
+th:first-of-type,
+td:first-of-type {
+  text-align: center;
+}
+
+th,
+td {
+  padding: 1rem;
+  border: none;
+  text-align: left;
+}
+
+.tableHeaderContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.infoIconContainer {
+  width: 20px;
+  display: flex;
+  align-items: center;
+}

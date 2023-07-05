@@ -1,26 +1,27 @@
-import { BrowserRouter as Router } from 'react-router-dom';
-import logoPichincha from '/pichincha-logo.png';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { ListProductsView } from './views/ListProductsView';
+import { ProductFormView } from './views/ProductFormView';
 import styles from './App.module.css';
-import { Button } from './components';
+import logoPichincha from '/pichincha-logo.png';
 
+export const App = () => {
+  const router = createBrowserRouter([
+    { path: '/', element: <ListProductsView /> },
+    { path: '/product', element: <ProductFormView /> },
+    { path: '/product/:id', element: <ProductFormView /> },
+  ]);
 
-function App() {
   return (
     <>
       <header className={styles.header}>
         <img className={styles.logo} src={logoPichincha} alt="Banco Pichincha" />
       </header>
       <main className={styles.main}>
-        <Router></Router>
+        <RouterProvider router={router} />
       </main>
-      <Button onClick={() => console.log('clicked')} disabled>
-        Agregar
-      </Button>
-      <Button type="secondary" onClick={() => console.log('clicked reiniciar')}>
-        Reiniciar
-      </Button>
     </>
   );
-}
+};
 
 export default App;

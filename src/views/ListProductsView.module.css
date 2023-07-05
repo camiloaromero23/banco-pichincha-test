@@ -1,0 +1,22 @@
+.container {
+  margin: 0 5rem;
+}
+
+.toolsContainer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 3px;
+  padding: 1rem;
+}
+
+.countContainer {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+  font-weight: 600;
+}

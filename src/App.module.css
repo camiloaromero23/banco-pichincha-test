@@ -10,13 +10,10 @@
   width: 20vw;
 }
 
-.main {
-  display: grid;
-  place-content: center;
+.header {
+  background: white;
 }
 
-@media (prefers-color-scheme: light) {
-  .header {
-    background: white;
-  }
+.main {
+  padding-top: 4rem;
 }

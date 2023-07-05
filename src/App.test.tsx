@@ -6,6 +6,6 @@ describe("App", () => {
   it("renders App", () => {
     render(<App />);
 
-    expect(screen.getByText("Vite + React")).toBeInTheDocument();
+    expect(screen.getByAltText("Banco Pichincha")).toBeInTheDocument();
   });
 });
