@@ -1,0 +1,16 @@
+.container {
+  margin: 0 10rem;
+  background: white;
+  border-radius: 3px;
+}
+
+
+.title {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  color: black;
+
+  border-bottom: 2px solid #D0D0D0;
+}

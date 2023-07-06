@@ -1,0 +1,56 @@
+.form {
+  padding: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form .formField {
+  flex: 49%;
+}
+
+@media (max-width: 1280px) {
+  .form .formField {
+    flex: 100%;
+  }
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.formField .input.error {
+  border-color: red;
+}
+
+.formField .input {
+  height: 2.5rem;
+  padding: 0 0.5rem;
+}
+
+.formField label {
+  font-weight: 600;
+}
+
+.form .buttonsContainer {
+  padding-top: 4rem;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.formFieldError {
+  color: red;
+  font-size: 0.8rem;
+  margin: 0;
+  min-height: 20px;
+}

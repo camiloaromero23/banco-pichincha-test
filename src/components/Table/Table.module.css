@@ -17,6 +17,10 @@
 th:first-of-type,
 td:first-of-type {
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 25px
 }
 
 th,
@@ -42,4 +46,7 @@ td {
   max-width: 25px;
   max-height: 25px;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

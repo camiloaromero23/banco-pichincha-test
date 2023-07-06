@@ -1,23 +1,29 @@
 import cx from 'classnames';
 
 import { Button, Input, Table } from '../components';
-import { useData } from '../hooks/useData';
+import { useProducts } from '../hooks/useProducts';
 
+import { useNavigation } from '../hooks/useNavigation';
 import styles from './ListProductsView.module.css';
-import { useAddProduct } from '../hooks/useAddProduct';
 
 export const ListProductsView = () => {
-  const { data, count, search, handleSearchChange } = useData();
+  const { data, count, search, handleSearchChange } = useProducts();
 
-  const { handleAddClick } = useAddProduct();
+  const { handleNavigate } = useNavigation();
+
+  const handleClick = () => handleNavigate('/product');
 
   return (
     <>
       <div className={cx(styles.container, styles.toolsContainer)}>
-        <Input placeholder="Search..." value={search} onChange={handleSearchChange} />
-        <Button onClick={handleAddClick}>Agregar</Button>
+        <Input
+          placeholder="Search..."
+          value={search}
+          onChange={handleSearchChange}
+        />
+        <Button onClick={handleClick}>Agregar</Button>
       </div>
-      <div className={cx(styles.container, styles.tableContainer)}>
+      <div className={cx(styles.container, styles.contentContainer)}>
         <Table data={data} />
         <div className={styles.countContainer}>{count}</div>
       </div>

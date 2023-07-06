@@ -3,40 +3,43 @@ import cx from 'classnames';
 
 import styles from './Button.module.css';
 
-export const enum ButtonType {
+export const enum ButtonVariant {
   primary = 'primary',
   secondary = 'secondary',
 }
 
 interface Props {
   children?: React.ReactNode;
-  type?: keyof typeof ButtonType;
-  onClick: () => void;
+  variant?: keyof typeof ButtonVariant;
+  onClick?: () => void;
   disabled?: boolean;
+  type?: 'button' | 'submit';
 }
 
 export const Button: React.FC<Props> = ({
   children,
   disabled,
   onClick,
-  type = ButtonType.primary,
+  variant = ButtonVariant.primary,
+  type = 'button',
 }) => {
 
   const handleClick = () => {
     if (disabled) {
       return;
     }
-    onClick();
+    onClick && onClick();
   };
 
   return (
     <button
       className={cx(styles.button, {
-        [styles.secondary]: type === ButtonType.secondary,
+        [styles.secondary]: variant === ButtonVariant.secondary,
         [styles.disabled]: disabled,
       })}
       onClick={handleClick}
       disabled={disabled}
+      type={type}
     >
       {children}
     </button>

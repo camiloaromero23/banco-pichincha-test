@@ -1,19 +1,34 @@
 import React from 'react';
 
 import defaultLogo from '../../assets/default-logo.svg';
-import dots from '../../assets/dots.svg';
 import { tableKeys } from '../../constants/tableKeys.constant';
 import { Product } from '../../interfaces/product.interface';
 import { formatDate } from '../../utils/date';
 import { InfoIcon } from './InfoIcon';
 
 import styles from './Table.module.css';
+import { Dropdown } from '..';
+import { useNavigation } from '../../hooks/useNavigation';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteProduct } from '../../services/product.service';
 
 interface Props {
   data: Product[];
 }
 
 export const Table: React.FC<Props> = ({ data }) => {
+  const { handleNavigate } = useNavigation();
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useMutation({
+    mutationFn: deleteProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries(['products']);
+    },
+    onMutate: () => {
+      queryClient.invalidateQueries(['products']);
+    },
+  });
+
   if (!data.length) {
     return <p>No hay datos</p>;
   }
@@ -58,7 +73,20 @@ export const Table: React.FC<Props> = ({ data }) => {
             <td>{formatDate(item.date_release)}</td>
             <td>{formatDate(item.date_revision)}</td>
             <td className={styles.tableRow}>
-              <img src={dots} className={styles.options} />
+              <Dropdown
+                actions={[
+                  {
+                    label: 'Editar',
+                    onClick: () => {
+                      handleNavigate(`/product/${item.id}`);
+                    },
+                  },
+                  {
+                    label: 'Eliminar',
+                    onClick: () => mutateAsync(item.id),
+                  },
+                ]}
+              />
             </td>
           </tr>
         ))}
